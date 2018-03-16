@@ -1,25 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import {AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { SignupPage } from '../pages/signup/signup';
+
+
+
+const firebaseAppConfig: FirebaseAppConfig = {
+  apiKey: "AIzaSyD5LYmY49t3nLy-nsb5GJIeCi4j0DZUnQ4",
+  authDomain: "ionic3-firabase-chat.firebaseapp.com",
+  databaseURL: "https://ionic3-firabase-chat.firebaseio.com",
+  projectId: "ionic3-firabase-chat",
+  storageBucket: "ionic3-firabase-chat.appspot.com",
+  messagingSenderId: "730625937929"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    SignupPage
   ],
   imports: [
+    AngularFireModule.initializeApp(firebaseAppConfig),
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    SignupPage
   ],
   providers: [
     StatusBar,
