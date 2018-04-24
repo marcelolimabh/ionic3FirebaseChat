@@ -13,7 +13,7 @@ import { AuthService } from '../../providers/auth.service';
 })
 export class HomePage {
 
-
+  view: string = 'chats';
   users: Observable<User>;
   constructor(public navCtrl: NavController, private userService: UserService, private authService: AuthService) {
 

@@ -14,6 +14,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthService } from '../providers/auth.service';
+import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
@@ -32,6 +33,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
 
 @NgModule({
   declarations: [
+    CustomLoggedHeaderComponent,
     MyApp,
     HomePage,
     SignupPage,
@@ -49,6 +51,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    CustomLoggedHeaderComponent,
     MyApp,
     HomePage,
     SignupPage,
