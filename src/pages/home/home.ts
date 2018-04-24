@@ -4,6 +4,7 @@ import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../providers/auth.service';
 
 
 @Component({
@@ -14,8 +15,12 @@ export class HomePage {
 
 
   users: Observable<User>;
-  constructor(public navCtrl: NavController, private userService: UserService) {
+  constructor(public navCtrl: NavController, private userService: UserService, private authService: AuthService) {
 
+  }
+
+  ionViewCanEnter(): Promise<boolean>{
+    return this.authService.authenticated;
   }
 
   ionViewDidLoad(){

@@ -21,4 +21,25 @@ export class AuthService extends BaseService{
     return this.fireBaseAuth.auth.createUserWithEmailAndPassword(user.email, user.password).catch(this.handlePromisseError);
   }
 
+  signinwithEmail(user: {email: string, password: string}): Promise<boolean>{
+    return this.fireBaseAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((authState)=>{
+      console.log(authState);
+
+        return authState != null;
+    }).catch(this.handlePromisseError);
+  }
+
+  logout(): Promise<any>{
+    console.log('logout');
+    return this.fireBaseAuth.auth.signOut();
+  }
+
+  get authenticated(): Promise<boolean>{
+    return new Promise((resolve, reject)=>{
+      this.fireBaseAuth.authState.first().subscribe((authState) =>{
+        (authState) ? resolve(true) : reject(false);
+      });
+    });
+  }
+
 }

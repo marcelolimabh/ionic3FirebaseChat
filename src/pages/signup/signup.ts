@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -38,7 +39,7 @@ export class SignupPage {
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', Validators.compose([Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")])],
       password: ['', Validators.required]
-    })
+    });
   }
 
 
@@ -59,6 +60,7 @@ export class SignupPage {
           this.userService.create(formUser).then(() => {
             console.log('Usuário Criado.');
             loading.dismiss();
+            this.navCtrl.push(HomePage);
           }).catch((error: Error) => {
             console.log(error);
             loading.dismiss();
