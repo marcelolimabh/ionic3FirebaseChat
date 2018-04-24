@@ -10,7 +10,9 @@ import {AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { AuthService } from '../providers/auth.service';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from '../pages/signup/signup';
@@ -36,7 +38,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    //AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireDatabaseModule,
     BrowserModule,
@@ -50,10 +52,11 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SignupPage
   ],
   providers: [
+    AuthService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserService
+    UserService,
   ]
 })
 export class AppModule {}
