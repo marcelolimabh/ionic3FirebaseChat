@@ -56,8 +56,8 @@ export class SignupPage {
           password: formUser.password
         }).then((authState) => {
           delete formUser.password;
-          formUser.uid = authState.uid;
-          this.userService.create(formUser).then(() => {
+          let uuid: string = authState.uid
+          this.userService.create(formUser, uuid).then(() => {
             console.log('Usuário Criado.');
             loading.dismiss();
             this.navCtrl.push(HomePage);

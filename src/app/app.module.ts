@@ -1,4 +1,3 @@
-import { SigninPage } from './../pages/signin/signin';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,9 +13,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthService } from '../providers/auth.service';
+import { CapitalizePipe } from './../pipes/capitalize.pipe';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header';
-import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MyApp } from './app.component';
+import { SigninPage } from './../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { UserService} from '../providers/user.service';
 
@@ -33,9 +34,10 @@ const firebaseAppConfig: FirebaseAppConfig = {
 
 @NgModule({
   declarations: [
+    CapitalizePipe,
     CustomLoggedHeaderComponent,
-    MyApp,
     HomePage,
+    MyApp,
     SignupPage,
     SigninPage
   ],

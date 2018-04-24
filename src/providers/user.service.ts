@@ -27,8 +27,8 @@ export class UserService extends BaseService {
     console.log('Hello UserProvider Provider');
   }
 
-  create(user) {
-    return this.db.object(`/users/${user.uid}`).set(user).catch(this.handlePromisseError);
+  create(user: User, uuid: string) {
+    return this.db.object(`/users/${uuid}`).set(user).catch(this.handlePromisseError);
   }
 
   getAll(): any {
