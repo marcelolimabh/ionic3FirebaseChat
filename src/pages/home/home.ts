@@ -20,6 +20,7 @@ import firebase from 'firebase';
 export class HomePage {
 
   view: string = 'chats';
+  chats: Observable<Chat[]>;
   users: Observable<User[]>;
   constructor(public navCtrl: NavController,
     private userService: UserService,
@@ -34,6 +35,7 @@ export class HomePage {
 
   ionViewDidLoad(){
    this.users = this.userService.users;
+   this.chats = this.chatService.chats;
   }
 
   onSignup():void{

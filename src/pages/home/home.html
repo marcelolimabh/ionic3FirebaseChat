@@ -1,5 +1,5 @@
 <ion-header>
- <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
+  <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
 
   <ion-toolbar>
     <ion-segment [(ngModel)]="view">
@@ -17,18 +17,26 @@
 
   <div [ngSwitch]="view">
     <ion-list *ngSwitchCase="'chats'" no-lines>
-      <ion-item>Chats</ion-item>
+      <button ion-item *ngFor="let c of chats | async">
+        <h2>{{c.title}}</h2>
+        <p *ngIf="c.lastMessage; else customMessage">{{c.timestamp | date: 'dd/MM/y H:mm'}} - {{ c.lastMessage}}</p>
+        <ng-template #customMessage>
+          <p>
+            No Messages
+          </p>
+        </ng-template>
+      </button>
     </ion-list>
 
-  <ion-list no-lines *ngSwitchCase="'users'">
+    <ion-list no-lines *ngSwitchCase="'users'">
 
-  <button ion-item *ngFor="let user of users | async" (click)="onChatCreate(user)">
-    {{user.name}}
-  </button>
-</ion-list>
+      <button ion-item *ngFor="let user of users | async" (click)="onChatCreate(user)">
+        {{user.name}}
+      </button>
+    </ion-list>
 
   </div>
 
 
-<button ion-button block (click)="onSignup()">Signup</button>
+  <button ion-button block (click)="onSignup()">Signup</button>
 </ion-content>
