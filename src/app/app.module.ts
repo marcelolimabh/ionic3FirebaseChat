@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthService } from '../providers/auth.service';
 import { CapitalizePipe } from './../pipes/capitalize.pipe';
+import { ChatPage } from './../pages/chat/chat';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header';
 import { HomePage } from '../pages/home/home';
 import { MyApp } from './app.component';
@@ -35,6 +36,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
 @NgModule({
   declarations: [
     CapitalizePipe,
+    ChatPage,
     CustomLoggedHeaderComponent,
     HomePage,
     MyApp,
@@ -53,6 +55,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    ChatPage,
     CustomLoggedHeaderComponent,
     MyApp,
     HomePage,
