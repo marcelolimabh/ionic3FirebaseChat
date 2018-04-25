@@ -21,6 +21,7 @@ import { MyApp } from './app.component';
 import { SigninPage } from './../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { UserService} from '../providers/user.service';
+import { ChatService } from '../providers/chat.service';
 
 
 
@@ -68,6 +69,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserService,
+    ChatService,
   ]
 })
 export class AppModule {}
