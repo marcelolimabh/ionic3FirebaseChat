@@ -1,3 +1,4 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,20 +20,40 @@ import { User } from './../models/user.model';
 @Injectable()
 export class UserService extends BaseService {
 
-  private items = this.db.list<User>('/users').snapshotChanges();
+  private users : Observable<User[]>;
 
 
-  constructor(public http: HttpClient, private db: AngularFireDatabase) {
+
+  currentUser: Observable<any>;
+
+
+  constructor(public http: HttpClient, private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
     super();
-    console.log('Hello UserProvider Provider');
+    this.listenAuthState();
+  }
+
+  private listenAuthState(): void{
+    this.afAuth.authState.subscribe((user)=>{
+      if(user){
+        this.currentUser = this.db.object(`/users/${user.uid}`, ).valueChanges();
+        console.log(this.currentUser);
+        this.setUsers(user.uid);
+      }
+    });
+  }
+
+  private setUsers(uidToExclude):void{
+    this.users = this.db.list<User>('/users', ref => ref.orderByChild('username')).valueChanges().map((users: User[])=>{
+      return users.filter((user: User)=>user._key !== uidToExclude);
+    });
   }
 
   create(user: User, uuid: string) {
     return this.db.object(`/users/${uuid}`).set(user).catch(this.handlePromisseError);
   }
 
-  getAll(): any {
-    return this.items;
+  getAll(): Observable<User[]> {
+    return this.users;
   }
 
   userExists(username: string): Observable<boolean> {

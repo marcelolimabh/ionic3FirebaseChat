@@ -15,7 +15,7 @@ import { AuthService } from '../../providers/auth.service';
 export class HomePage {
 
   view: string = 'chats';
-  users: Observable<User>;
+  users: Observable<User[]>;
   constructor(public navCtrl: NavController, private userService: UserService, private authService: AuthService) {
 
   }
@@ -25,12 +25,13 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.users = this.userService.getAll().map(
+   /*  this.users = this.userService.getAll().map(
       changes => {
         return changes.map(c => ({
           key: c.payload.key, ...c.payload.val()
         }))
-      });
+      }); */
+   this.users = this.userService.getAll();
   }
 
   onSignup():void{

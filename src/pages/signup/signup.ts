@@ -1,3 +1,4 @@
+import { SigninPage } from './../signin/signin';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
@@ -56,11 +57,12 @@ export class SignupPage {
           password: formUser.password
         }).then((authState) => {
           delete formUser.password;
-          let uuid: string = authState.uid
-          this.userService.create(formUser, uuid).then(() => {
+          formUser._key = authState.uid;
+          this.userService.create(formUser, formUser._key).then(() => {
             console.log('Usuário Criado.');
             loading.dismiss();
-            this.navCtrl.push(HomePage);
+            this.showAlert('Usuário Criado com sucesso!.');
+            this.navCtrl.push(SigninPage);
           }).catch((error: Error) => {
             console.log(error);
             loading.dismiss();

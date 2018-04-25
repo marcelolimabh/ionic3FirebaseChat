@@ -5,4 +5,5 @@ export class User{
   email:string;
   username:string;
   photo: string;
+  _key: string;
 }
