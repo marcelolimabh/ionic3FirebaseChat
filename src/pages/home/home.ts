@@ -25,13 +25,7 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-   /*  this.users = this.userService.getAll().map(
-      changes => {
-        return changes.map(c => ({
-          key: c.payload.key, ...c.payload.val()
-        }))
-      }); */
-   this.users = this.userService.getAll();
+   this.users = this.userService.users;
   }
 
   onSignup():void{
