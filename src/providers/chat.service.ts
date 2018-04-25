@@ -23,7 +23,7 @@ export class ChatService  extends BaseService{
   setChats(): void{
     this.afAuth.authState.subscribe((user =>{
       if(user){
-        this.chats = <Observable<Chat[]>>this.af.list(`/chats/${user.uid}`, ref => ref.orderByChild('username'))
+        this.chats = <Observable<Chat[]>>this.af.list(`/chats/${user.uid}`, ref => ref.orderByChild('timestamp'))
         .valueChanges()
         .map((chats: Chat[])=>{
           if(chats && chats.length > 0){
