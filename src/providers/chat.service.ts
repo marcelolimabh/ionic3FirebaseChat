@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { BaseService } from './base.service';
@@ -12,8 +13,25 @@ import { Chat } from '../models/chat.model';
 @Injectable()
 export class ChatService  extends BaseService{
 
-  constructor(public http: HttpClient, public af: AngularFireDatabase) {
+  chats: Observable<Chat[]>;
+
+  constructor(public http: HttpClient, public af: AngularFireDatabase, private afAuth: AngularFireAuth) {
    super();
+   this.setChats();
+  }
+
+  setChats(): void{
+    this.afAuth.authState.subscribe((user =>{
+      if(user){
+        this.chats = <Observable<Chat[]>>this.af.list(`/chats/${user.uid}`, ref => ref.orderByChild('username'))
+        .valueChanges()
+        .map((chats: Chat[])=>{
+          if(chats && chats.length > 0){
+            return chats.reverse();
+          }
+        });
+      }
+    }));
   }
 
   create(chat: Chat, userId1: string, userId2: string): Promise<void>{
