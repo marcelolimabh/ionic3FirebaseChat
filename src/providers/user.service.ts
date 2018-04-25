@@ -66,5 +66,10 @@ export class UserService extends BaseService {
     .catch(this.handleObservableError);
   }
 
+  getUserById(userId: string): Observable<User>{
+
+    return <Observable<User>> this.db.object(`/users/${userId}`).valueChanges().catch(this.handleObservableError);
+  }
+
 
 }
