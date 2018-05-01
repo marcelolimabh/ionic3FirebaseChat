@@ -22,6 +22,7 @@ import { SigninPage } from './../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { UserService} from '../providers/user.service';
 import { ChatService } from '../providers/chat.service';
+import { MessageService } from './../providers/message.service';
 
 
 
@@ -70,6 +71,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserService,
     ChatService,
+    MessageService
   ]
 })
 export class AppModule {}

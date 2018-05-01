@@ -1,9 +1,13 @@
 export class User{
 
 
-  name:string;
-  email:string;
-  username:string;
-  photo: string;
-  _key: string;
+
+  public _key: string;
+
+  constructor(public name: string,
+    public email: string,
+    public username: string,
+   public  photo: string){
+
+   }
 }

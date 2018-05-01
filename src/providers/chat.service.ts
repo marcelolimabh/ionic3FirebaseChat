@@ -25,17 +25,15 @@ export class ChatService  extends BaseService{
     this.afAuth.authState.subscribe((user) => {
       if(user){
         this.chats = <Observable<Chat[]>>this.af.list(`/chats/${user.uid}`, ref => ref.orderByChild('timestamp'))
-
           .snapshotChanges()
           .map(
             changes => {
               return changes.map(c => ({
                 key: c.payload.key, ...c.payload.val()
-              }))
+              }));
             });
       }
     });
-
   }
 
   create(chat: Chat, userId1: string, userId2: string): Promise<void>{
